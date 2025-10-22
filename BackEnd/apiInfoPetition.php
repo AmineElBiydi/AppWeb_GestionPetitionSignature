@@ -7,6 +7,7 @@
     $idp = isset($_GET['id'])? $_GET['id'] : 1;
 
     $petition = getPetition($idp);
+
     
     echo json_encode($petition);
     

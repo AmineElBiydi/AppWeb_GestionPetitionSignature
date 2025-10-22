@@ -41,7 +41,6 @@
          }
 
         $result['sigCount']= getNumberOfsignaturPetition($idp);
-//        print_r($result) ;
         return $result ;
     }
 
@@ -54,4 +53,18 @@
         
         return $result['nbr'] ;
         
+    }
+
+    function getLastSignatures($idp){
+        global $DATA_BASE ;
+        $query = "SELECT * FROM signature WHERE IDP = ? ORDER BY DateAjout , HeureS DESC LIMIT 5";
+        $statement = $DATA_BASE->prepare($query);
+        $statement->execute([$idp]);
+        $result = $statement->fetchAll() ; // Fetch a single associative array
+
+        if (!$result ) {
+            return null;
+        }
+
+        return $result ;
     }

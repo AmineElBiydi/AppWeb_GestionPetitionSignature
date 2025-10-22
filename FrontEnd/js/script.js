@@ -5,6 +5,7 @@ let searchQuery = '';
 let visibleCount = 9; 
 const PETITIONS_PER_PAGE = 6;
 let dataPetition = null; 
+let LastestSignatures = null;
 
 
 function toggleSearch() {
@@ -156,8 +157,7 @@ async function showForm(idF){
     
 
     try {
-        await selectPetition(idF); 
-
+        await selectPetition(idF)
         if (dataPetition == null ) {
             modalOverlay.innerHTML = `<div class="modal-content"><p>Error: Petition not found.</p><button class="modal-close" onclick="closeModal()">X</button></div>`;
             return;
@@ -198,7 +198,7 @@ async function showForm(idF){
                 <form action="../BackEnd/signPetition.php" method="POST" class="flex flex-col gap-4 ">
                     <h2 class="text-xl font-bold text-center">Sign the Petition</h2>
                     <input type="hidden" name="idp" value="${dataPetition.IDP}">
-                   <div><label for="prenom" class="font-bold mb-2 block">First Name:</label><input type="text" id="prenom" name="prenom" class="input w-full" placeholder="Enter your first name" required></div>
+                    <div><label for="prenom" class="font-bold mb-2 block">First Name:</label><input type="text" id="prenom" name="prenom" class="input w-full" placeholder="Enter your first name" required></div>
                     <div><label for="nom" class="font-bold mb-2 block">Last Name:</label><input type="text" id="nom" name="nom" class="input w-full" placeholder="Enter your last name" required></div>
                     <div><label for="email" class="font-bold mb-2 block">Email Address:</label><input type="email" id="email" name="email" class="input w-full" placeholder="Enter your email address" required></div>
                     <div>
@@ -292,9 +292,8 @@ async function showForm(idF){
                             <option value="Niger">Niger</option>
                             <option value="Nigeria">Nigeria</option>
                             <option value="North Korea">North Korea</option>
-                            <option value="Norway">Norway</option>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign the Petition</button>
+                            <option value="Norway">Norway</option> </div>
+                    <button type="submit" class="btn btn-primary">Sign the Petition
                 </form>
             </div>
         </div>
@@ -306,12 +305,22 @@ async function showForm(idF){
 }
 
 async function selectPetition(idp) {
-    await fetch('../BackEnd/apiInfoPetiton.php?id='+idp)
+    await fetch('../BackEnd/apiInfoPetition.php?id='+idp)
         .then(response => response.json())
         .then(data => {
-           dataPetition = data ; 
+           dataPetition = data ;
         });
 }
+
+async function selectSignaturPetition(idp) {
+    await fetch('../BackEnd/apiInfoPetitonSignatur.php?id='+idp)
+        .then(response => response.json())
+        .then(data => {
+            LastestSignatures = data ;
+        });
+}
+
+
 
 function showSignaturForm(){
     const signatureForm = document.getElementById('SignaturForm');

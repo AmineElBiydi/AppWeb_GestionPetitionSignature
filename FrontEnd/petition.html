@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign the Petition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .petition-info p {
+            text-align: justify;
+        }
+        .signature-count {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"] {
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="petition-info">
+            <h1>Petition to Save Our Local Park</h1>
+            <p>We, the undersigned, are concerned citizens who urge our leaders to act now to protect and preserve our beloved local park. This park is a vital green space for our community, providing a place for recreation, relaxation, and connection with nature. We are petitioning to prevent any commercial development and to ensure it remains a public park for generations to come.</p>
+        </div>
+
+        <div class="signature-count">
+            <p>Join <span id="count">1,234</span> others in signing this petition!</p>
+        </div>
+
+        <form action="/sign-petition" method="POST">
+            <h2>Sign the Petition</h2>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+            <button type="submit">Sign the Petition</button>sad
+        </form>
+    </div>
+
+</body>
+</html>

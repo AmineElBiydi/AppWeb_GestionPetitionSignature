@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetitionHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    <nav class="w-full border-b px-6 py-4" style="border-color: var(--border);">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"  onclick="window.location.href='index.php';" >
+                    <svg class="icon-lg" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span style="font-weight: 500;">PetitionHub</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <button class="btn btn-ghost" onclick="toggleSearch()">
+                        <svg id="search-icon" class="icon" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <svg id="close-icon" class="icon hidden" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        Browse
+                    </button>
+                </div>
+            </div>
+            
+            <div id="search-bar" class="mt-4 hidden">
+                <div class="relative">
+                    <svg class="icon absolute left-3 top-1/2 transform -translate-y-1/2" style="color: var(--muted-foreground);" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="search-input" class="input" placeholder="Search by petition name or creator..." style="padding-left: 2.5rem;" oninput="filterPetitions()">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <div class="mb-8">
+            <h1 style="font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem;">Petitions</h1>
+            <p style="color: var(--muted-foreground);">
+                Support causes that matter to you by signing these petitions
+            </p>
+        </div>
+        
+        <!-- Filter Controls -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <!-- <div class="flex items-center gap-2">
+                <span style="color: var(--muted-foreground);">Status:</span>
+                <div class="flex gap-2">
+                    <button id ='all' class="btn btn-outline active" onclick="setStatusFilter('all')" data-filter="all">All</button>
+                    <button id ='active' class="btn btn-outline" onclick="setStatusFilter('active')" data-filter="active">Active</button>
+                    <button id ='complete' class="btn btn-outline" onclick="setStatusFilter('complete')" data-filter="completed">Completed</button>
+                </div>
+            </div> -->
+
+            <div class="flex items-center gap-2">
+                <span style="color: var(--muted-foreground);">Sort:</span>
+                <button id="sort-button" class="btn btn-outline" onclick="toggleSort()">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="m3 8 4-4 4 4"></path><path d="M7 4v16"></path><path d="m21 16-4 4-4-4"></path><path d="M17 20V4"></path></svg>
+                    <span id="sort-label">Newest First</span>
+                </button>
+            </div>
+
+        </div>
+        
+        <div id="petitions-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Petition cards will be inserted here by JavaScript -->
+
+        </div>
+
+        <div id="show-more-container" class="text-center mt-8 hidden">
+            <button class="btn btn-secondary" onclick="showMore()">Show More</button>
+        </div>
+
+        <!-- No Results Message -->
+        <div id="no-results" class="text-center py-12 hidden">
+            <p style="color: var(--muted-foreground);">No petitions found matching your search.</p>
+        </div>
+    </main>
+
+    <!-- Form (Modal) -->
+    <div id="petition-modal" class="modal-overlay hidden ">
+       <!--   this div will be filled with js  -->
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

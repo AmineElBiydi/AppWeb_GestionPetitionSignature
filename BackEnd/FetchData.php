@@ -2,7 +2,6 @@
     session_start();
 
     include 'DataBaseConnexion.php';
-    include 'verifyRecaptcha.php';
 
     function getAllPetitions(){
         
@@ -173,17 +172,15 @@
         return $result['nbr'] ;
     }
 
-
-    function signaturExiste($idp, $email){
+    function signaturExist($idp, $email){
+        global $DATA_BASE;
         $query = 'SELECT * FROM signature WHERE IDP = ? AND EmailS = ? ';
         $statement = $DATA_BASE->prepare($query);
-        $statement->execute([strtolower($idp), strtolower($email)]);
+        $statement->execute([$idp, $email]);
         $result = $statement->fetchAll();
         return !empty($result);
     }
-?>
 
-<?php
     function getUserPetitions($emailU) {
         global $DATA_BASE;
         $query = "SELECT * FROM petition WHERE EmailU = ? ORDER BY IDP DESC";

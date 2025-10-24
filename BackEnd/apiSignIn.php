@@ -1,5 +1,7 @@
 <?php
     include 'FetchData.php';
+    include 'verifyRecaptcha.php';
+
 
     header('Content-Type: application/json');
 

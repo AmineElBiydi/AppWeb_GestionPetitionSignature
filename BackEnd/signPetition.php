@@ -4,21 +4,13 @@
 
     header('Content-Type: application/json');
 
-    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
-    if (!verifyRecaptcha($recaptchaResponse)) {
-        echo json_encode(['success' => false, 'message' => 'CAPTCHA verification failed. Please try again.']);
-        exit;
-    }
-
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
     $country = $_POST['country'];
     $idp = $_POST['idp'];
 
-    
-
-    if( signaturExiste($idp, $email) ){
+    if( !signaturExist($idp, $email) ){
         signerPetition($idp, $nom, $prenom, $country, $email) ;
         echo json_encode(['success' => true, 'message' => 'Signature saved successfully!']);
     } else {

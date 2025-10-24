@@ -2,12 +2,6 @@
     include 'FetchData.php';
     header('Content-Type: application/json');
 
-    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
-    if (!verifyRecaptcha($recaptchaResponse)) {
-        echo json_encode(['success' => false, 'message' => 'CAPTCHA verification failed. Please try again.']);
-        exit;
-    }
-
     if (!isset($_SESSION['emailU'])) {
         http_response_code(401);
         echo json_encode(['success' => false, 'message' => 'Unauthorized access.']);

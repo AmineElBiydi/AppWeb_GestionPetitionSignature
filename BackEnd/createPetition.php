@@ -2,19 +2,12 @@
     include 'FetchData.php';
 
     header('Content-Type: application/json');
-        
-    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
-    if (!verifyRecaptcha($recaptchaResponse)) {
-        echo json_encode(['success' => false, 'message' => 'CAPTCHA verification failed. Please try again.']);
-        exit;
-    }
 
     $titre = strtolower($_POST['titre']);
     $description = strtolower($_POST['description']);
     $nomPorteur = strtolower($_POST['nomPorteur']);
     $emailPorteur = strtolower($_POST['emailPorteur']);
     $dateFin = $_POST['dateFin'];
-    $emailU = strtolower($_SESSION['emailU']);
 
     // Validate that end date is in the future
     $today = date('Y-m-d');
@@ -22,6 +15,12 @@
         echo json_encode(['success' => false, 'message' => 'End date must be in the future!']);
         exit;
     }
+
+    if (!isset($_SESSION['emailU'])) {
+        echo json_encode(['success' => false, 'message' => 'You must be logged in to create a petition.']);
+        exit;
+    }
+    $emailU = strtolower($_SESSION['emailU']);
 
     try {
         if( ! petitionExist($titre) ){

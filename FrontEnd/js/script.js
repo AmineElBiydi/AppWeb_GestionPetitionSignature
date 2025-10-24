@@ -624,7 +624,7 @@ async function showForm(idF){
                                 </select>
                             </div>
                             <div class="flex justify-center">
-                                <div class="g-recaptcha" data-sitekey="6LdABvUrAAAAALrMMwz9DRQX3-5VdVRopKa8y4C2"></div>
+                                <div class="g-recaptcha" data-sitekey="6Lc-AfUrAAAAAB2Q29jQJs2I4V2Fy7jUbSBvOQEy"></div>
                             </div>
                             <button type="submit" class="btn btn-primary">Sign the Petition</button>
                     </form>
@@ -693,16 +693,16 @@ function showCreatePetitionForm() {
                             <label for="dateFin" class="font-bold mb-2 block text-left">End Date:</label>
                             <input type="date" id="dateFin" name="dateFin" class="input w-full" required>
                         </div>
+                        
                         <div class="flex justify-center">
-                            <div class="g-recaptcha" data-sitekey="6LdABvUrAAAAALrMMwz9DRQX3-5VdVRopKa8y4C2"></div>
-                        </div>                        
+                            <div class="g-recaptcha" data-sitekey="6Lc-AfUrAAAAAB2Q29jQJs2I4V2Fy7jUbSBvOQEy"></div>
+                        </div>
                         <button type="submit" class="btn btn-primary">Create Petition</button>
                     </form>
                 </div>
             </div>
         </div>
     `;
-
 }
 
 function createSignatureHTML(signature) {
@@ -1082,15 +1082,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Handle form submission via AJAX
     document.addEventListener('submit', function(e) {
-            if (e.target && e.target.id === 'signatureForm') {
-                e.preventDefault();
-                if (!validateRecaptcha()) {
-                return;
-            }
-        
+        if (e.target && e.target.id === 'signatureForm') {
+            e.preventDefault();
+            
             const formData = new FormData(e.target);
-            formData.append('g-recaptcha-response', grecaptcha.getResponse());
-                
             const xhr = new XMLHttpRequest();
             
             xhr.open('POST', '../BackEnd/signPetition.php', true);
@@ -1139,13 +1134,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Handle create petition form submission
         if (e.target && e.target.id === 'createPetitionForm') {
             e.preventDefault();
-            if (!validateRecaptcha()) {
-                return;
-            }
-        
-            const formData = new FormData(e.target);
-            formData.append('g-recaptcha-response', grecaptcha.getResponse());
             
+            const formData = new FormData(e.target);
             const xhr = new XMLHttpRequest();
             
             xhr.open('POST', '../BackEnd/createPetition.php', true);
@@ -1198,12 +1188,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (event.key === 'Escape') closeModal();
     });
 });
-
-function validateRecaptcha() {
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-        showCustomAlert('Please complete the CAPTCHA verification.', 'error');
-        return false;
-    }
-    return true;
-}

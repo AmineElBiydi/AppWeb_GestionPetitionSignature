@@ -224,9 +224,6 @@ function showCustomAlert(message, type = 'success', duration = 3500) {
             <p style="margin: 0; font-size: 13px; font-weight: 600; color: white; opacity: 0.95; margin-bottom: 2px;">${config.title}</p>
             <p class="custom-alert-message" style="font-size: 14px; font-weight: 400; color: white; opacity: 0.9;">${message}</p>
         </div>
-        <div class="flex justify-center">
-            <div class="g-recaptcha" data-sitekey="6LdABvUrAAAAALrMMwz9DRQX3-5VdVRopKa8y4C2"></div>
-        </div>
         <button class="custom-alert-close-btn" style="color: white;" aria-label="Close notification">
             <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -298,13 +295,4 @@ function showConfirmationModal(title, message, onConfirm) {
             closeModal();
         }
     });
-}
-
-function validateRecaptcha() {
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-        showCustomAlert('Please complete the CAPTCHA verification.', 'error');
-        return false;
-    }
-    return true;
 }

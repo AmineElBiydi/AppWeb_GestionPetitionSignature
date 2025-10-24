@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - PetitionHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleProfile.css">
+</head>
+<body>
+    <nav class="w-full border-b px-6 py-4" style="border-color: var(--border);">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity" onclick="window.location.href='index.html';">
+                    <svg class="icon-lg" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span style="font-weight: 500;">PetitionHub</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <!-- User Status Display -->
+                    <div id="user-status" class="flex items-center gap-4">
+                        <a href="auth-standalone.html" id="login-button-nav" class="btn btn-outline hidden">
+                            Login
+                        </a>
+                        <div id="user-display" class="hidden items-center gap-2">
+                            <span id="user-name" class="font-medium"></span>
+                            <button id="logout-button" class="btn btn-ghost text-sm">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <div class="mb-8">
+            <h1 style="font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem;">My Petitions</h1>
+            <p style="color: var(--muted-foreground);">
+                Here you can manage all the petitions you have created.
+            </p>
+        </div>
+        
+        <div id="user-petitions-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- User's petition cards will be inserted here by JavaScript -->
+        </div>
+
+        <!-- No Petitions Message -->
+        <div id="no-petitions" class="text-center py-12 hidden">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No petitions created</h3>
+            <p class="mt-1 text-sm text-gray-500">Get started by creating a new petition.</p>
+            <div class="mt-6">
+                <a href="index.html" class="btn btn-primary">
+                    Create Petition
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal-overlay hidden">
+       <!-- Edit form will be injected here by JS -->
+    </div>
+
+    <script src="js/scriptProfile.js"></script>
+</body>
+</html>

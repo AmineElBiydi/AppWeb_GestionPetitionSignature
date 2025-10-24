@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetitionHub</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
-    
 </head>
 <body>
     <nav class="w-full border-b px-6 py-4" style="border-color: var(--border);">
@@ -24,6 +25,26 @@
                 </div>
                 
                 <div class="flex items-center gap-4">
+                    <!-- User Status Display -->
+                    <div id="user-status" class="flex items-center gap-4">
+                        <a href="auth-standalone.html" id="login-button-nav" class="btn btn-outline">
+                            Login
+                        </a>
+                        <div id="user-display" class="hidden items-center gap-2">
+                            <a href="profile.html" id="user-name" class="font-medium hover:underline">
+                                <!-- Name will be inserted here -->
+                            </a>
+                            <button id="logout-button" class="btn btn-ghost text-sm">Logout</button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="showCreatePetitionForm()">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Create Petition
+                    </button>
                     <button class="btn btn-ghost" onclick="toggleSearch()">
                         <svg id="search-icon" class="icon" viewBox="0 0 24 24">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -58,17 +79,22 @@
             </p>
         </div>
         
+        <!-- Trending Petitions Section -->
+        <div id="max-petitions-section" class="relative mb-12 hidden">
+            <h2 class="text-xl font-bold mb-4">Trending Petitions</h2>
+            <button id="scroll-left" class="scroll-arrow left-0">
+                <svg class="icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div id="max-petitions-signatures-container" class="max-petitions-container">
+                <!-- Trending petition cards will be inserted here by JavaScript -->
+            </div>
+            <button id="scroll-right" class="scroll-arrow right-0">
+                <svg class="icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+
         <!-- Filter Controls -->
         <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <!-- <div class="flex items-center gap-2">
-                <span style="color: var(--muted-foreground);">Status:</span>
-                <div class="flex gap-2">
-                    <button id ='all' class="btn btn-outline active" onclick="setStatusFilter('all')" data-filter="all">All</button>
-                    <button id ='active' class="btn btn-outline" onclick="setStatusFilter('active')" data-filter="active">Active</button>
-                    <button id ='complete' class="btn btn-outline" onclick="setStatusFilter('complete')" data-filter="completed">Completed</button>
-                </div>
-            </div> -->
-
             <div class="flex items-center gap-2">
                 <span style="color: var(--muted-foreground);">Sort:</span>
                 <button id="sort-button" class="btn btn-outline" onclick="toggleSort()">
@@ -91,9 +117,9 @@
 
         <!-- No Results Message -->
         <div id="no-results" class="text-center py-12 hidden">
-            <p style="color: var(--muted-foreground);">No petitions found matching your search.</p>
+            <p style="color: var(--muted-foreground);">No petitions found .</p>
         </div>
-    </main>
+
 
     <!-- Form (Modal) -->
     <div id="petition-modal" class="modal-overlay hidden ">

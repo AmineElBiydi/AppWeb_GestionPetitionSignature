@@ -1,4 +1,4 @@
-:root {
+    :root {
     --background: #ffffff;
     --foreground: #1a1a1a;
     --muted: #ececf0;
@@ -26,6 +26,13 @@ body.modal-open {
     overflow: hidden;
 }
 
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 40; /* Below modal (50) but above content */
+    background-color: var(--background);
+    width: 100%;
+}
 
 .hidden {
     display: none !important;
@@ -49,20 +56,37 @@ body.modal-open {
     max-width: 42rem;
     width: 100%;
     max-height: 90vh;
-    overflow-y: auto;
-    padding: 1.5rem;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent the main container from scrolling */
+}
+
+.modal-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto; /* Make only the body scrollable */
 }
 
 .modal-close {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    position: static; /* Reset position to work within the flex header */
     background: none;
     border: none;
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s;
+    padding: 0.25rem; /* Add some padding for easier clicking */
 }
 
 .modal-close:hover {
@@ -197,4 +221,176 @@ body.modal-open {
 .icon-lg {
     width: 1.25rem;
     height: 1.25rem;
+}
+
+/* --- Max Petitions Horizontal Scroll --- */
+.max-petitions-container {
+    display: flex;
+    gap: 1.5rem; /* 24px */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem; /* Add space for scrollbar without cutting off shadow */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.max-petitions-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.max-petition-card {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    width: 2.5rem; /* 40px */
+    height: 2.5rem; /* 40px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-arrow:hover {
+    background-color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* --- Custom Alert System --- */
+/* Clean Stacked Alert System - Replace your alert CSS with this */
+
+.custom-alert-container {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    pointer-events: none;
+    max-width: 90vw;
+}
+
+.custom-alert {
+    position: relative;
+    padding: 16px 20px;
+    border-radius: 10px;
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        0 4px 10px rgba(0, 0, 0, 0.1);
+    min-width: 360px;
+    max-width: 500px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: alert-slide-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: auto;
+    overflow: hidden;
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.custom-alert.exiting {
+    animation: alert-slide-out 0.3s ease-out forwards;
+}
+
+.custom-alert-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.custom-alert-message {
+    flex: 1;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.custom-alert-close-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+.custom-alert-close-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+    transform: scale(1.05);
+}
+
+.custom-alert-close-btn:active {
+    transform: scale(0.95);
+}
+
+.alert-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    transform-origin: left;
+}
+
+/* Animations */
+@keyframes alert-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes alert-slide-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+}
+
+@keyframes alert-progress {
+    from { 
+        transform: scaleX(1); 
+    }
+    to { 
+        transform: scaleX(0); 
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    .custom-alert-container {
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        transform: none;
+        width: calc(100% - 32px);
+    }
+    
+    .custom-alert {
+        min-width: unset;
+        width: 100%;
+        padding: 14px 16px;
+    }
 }

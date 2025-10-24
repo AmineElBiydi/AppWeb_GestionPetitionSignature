@@ -1,12 +1,12 @@
 <?php
+    include 'FetchData.php';
     
     header('Content-Type: application/json'); 
 
-    include 'FetchData.php';
-
-
     $petitions = getAllPetitions();
     $signatures = getNumberOfsignatursAllPetitions();
+    $maxPetition = selectMaxSignedPetition();
 
-    echo json_encode(['petitions' => $petitions, 'signatures' => $signatures]);
+
+    echo json_encode(['petitions' => $petitions, 'signatures' => $signatures , 'maxPetitionSignatur' => $maxPetition]);
 ?>

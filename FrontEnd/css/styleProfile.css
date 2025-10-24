@@ -1,0 +1,56 @@
+.manage-card-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem; /* 12px */
+    padding: 0 1.5rem 1.5rem; /* 24px */
+}
+
+.btn-danger {
+    background-color: #ef4444; /* Red */
+    color: white;
+}
+
+/* Confirmation Modal Styles */
+.confirmation-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.confirmation-dialog {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    max-width: 28rem; /* 448px */
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    animation: alert-slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.confirmation-icon {
+    margin: 0 auto 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background-color: #fee2e2; /* Light red */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmation-title {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.confirmation-message {
+    color: var(--muted-foreground);
+    margin-bottom: 1.5rem;
+}
+
+.confirmation-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}

@@ -4,11 +4,16 @@
 
     include 'FetchData.php';
 
-    $idp = isset($_GET['id'])? $_GET['id'] : 1;
+    $idp = $_GET['id'] ;
 
-    $petition = getPetition($idp);
+    if( $idp == 0 ){
+        $nbrPetition = selectNbrTotalePetition();
+        echo json_encode($nbrPetition);
+    }else {
+        $petition = getPetition($idp);
+        echo json_encode($petition);    
+    }
 
     
-    echo json_encode($petition);
     
 ?>

@@ -1,13 +1,18 @@
 <?php
-
     header('Content-Type: application/json');
 
     include 'FetchData.php';
 
-    $idp = isset($_GET['id']) ? $_GET['id'] : 1;
+    $idp = $_GET['id'];
 
-    $signatures = getLastSignatures($idp);
-
-    echo json_encode($signatures);
-
+    if($idp == 0 ){
+        $signaturesNbr = getNbSignatures($idp);
+        echo json_encode($signaturesNbr);
+    }else {
+        $signatures = getLastSignatures($idp);
+        echo json_encode($signatures);
+    }
+    
+    
+    
 ?>
